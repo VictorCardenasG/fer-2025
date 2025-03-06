@@ -1,5 +1,5 @@
 # classifier.py
-
+# venv used -> deep-learning-cuda
 import torch
 import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
@@ -277,7 +277,7 @@ acc, loss, val_acc, val_loss, model = fit(model, optimizer, scheduler, cfg, trai
 
 visualize_history(acc, loss, val_acc, val_loss)
 
-torch.save(model.state_dict(), 'model_vicfiltered_notransforms_lr5e4_1000_6_emotions_res18_ai.h5')
+torch.save(model.state_dict(), r'C:\Users\Victor Cardenas\Documents\msc\semestre-4\idi-4\fer-2025\models\model_vicfiltered_notransforms_lr5e4_1000_6_emotions_res18_ai.h5')
 
 model.eval()
 
