@@ -54,7 +54,7 @@ class CustomDataset(Dataset):
 
 # Load the saved model
 model = timm.create_model(cfg["backbone"], pretrained=False, num_classes=cfg["n_classes"]).to(cfg["device"])
-model_path = r"C:\Users\Victor Cardenas\Documents\msc\semestre-4\idi-4\fer-2025\models\model_notransforms_lr5e4_1000_6_emotions_res18_ai.h5"
+model_path = r"C:\Users\Victor Cardenas\Documents\msc\semestre-4\idi-4\fer-2025\models\model_vicfiltered_notransforms_lr5e4_1000_6_emotions_res18_ai.pth"
 
 
 # Load the model state

@@ -48,7 +48,7 @@ cfg = {
     "backbone": 'resnet18',  
     "learning_rate": 5e-4,
     "lr_min": 1e-6,
-    "epochs": 20,
+    "epochs": 2,
     "device": torch.device("cuda:0" if torch.cuda.is_available() else "cpu"),
     "seed": 42
 }
@@ -277,7 +277,7 @@ acc, loss, val_acc, val_loss, model = fit(model, optimizer, scheduler, cfg, trai
 
 visualize_history(acc, loss, val_acc, val_loss)
 
-torch.save(model.state_dict(), r'C:\Users\Victor Cardenas\Documents\msc\semestre-4\idi-4\fer-2025\models\model_vicfiltered_notransforms_lr5e4_1000_6_emotions_res18_ai.h5')
+torch.save(model.state_dict(), r'C:\Users\Victor Cardenas\Documents\msc\semestre-4\idi-4\fer-2025\models\model_vicfiltered_notransforms_lr5e4_1000_6_emotions_res18_ai.pth')
 
 model.eval()
 
