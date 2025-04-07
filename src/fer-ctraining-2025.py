@@ -14,7 +14,7 @@ from tqdm import tqdm
 cfg = {
     "image_size": 252,
     "batch_size": 32,
-    "n_classes": 6,  # Number of emotions
+    "n_classes": 7,  # Number of emotions
     "backbone": 'resnet18',
     "learning_rate": 5e-4,  # You can reduce this for fine-tuning (e.g., 1e-4 or 1e-5)
     "epochs": 5,  # Fine-tune for fewer epochs

@@ -15,7 +15,7 @@ import random
 # Define configuration (use the same configuration used for training)
 cfg = {
     "image_size": 252,
-    "n_classes": 6,
+    "n_classes": 7,
     "backbone": 'resnet18',
     "device": torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 }
@@ -54,7 +54,7 @@ class CustomDataset(Dataset):
 
 # Load the saved model
 model = timm.create_model(cfg["backbone"], pretrained=False, num_classes=cfg["n_classes"]).to(cfg["device"])
-model_path = r"C:\Users\Victor Cardenas\Documents\msc\semestre-4\idi-4\fer-2025\models\model_vicfiltered_notransforms_lr5e4_1000_6_emotions_res18_ai.pth"
+model_path = r"C:\Users\Victor Cardenas\Documents\msc\semestre-4\idi-4\fer-2025\models\model_7emotions_2000imgs_res18_ai.pth"
 
 
 # Load the model state
@@ -67,7 +67,7 @@ os.makedirs(incorrect_preds_dir, exist_ok=True)
 
 # Function to evaluate the model on a validation set and save misclassified images
 def evaluate_model(validation_folder):
-    emotions = ["Anger", "Disgust", "Fear", "Happy", "Sad", "Surprise"]
+    emotions = ["Anger", "Disgust", "Fear", "Happy", "Neutral", "Sad", "Surprise"]
     y_true = []
     y_pred = []
     image_paths = []
@@ -161,13 +161,13 @@ def display_random_samples(dataset, y_pred, y_true, n_samples=20):
         
         plt.subplot(4, 5, i + 1)
         plt.imshow(image.permute(1, 2, 0).numpy())
-        plt.title(f'True: {["Anger", "Disgust", "Fear", "Happy", "Sad", "Surprise"][true_label]}\n'
-                  f'Pred: {["Anger", "Disgust", "Fear", "Happy", "Sad", "Surprise"][predicted_label]}')
+        plt.title(f'True: {["Anger", "Disgust", "Fear", "Happy", "Neutral", "Sad", "Surprise"][true_label]}\n'
+                  f'Pred: {["Anger", "Disgust", "Fear", "Happy", "Neutral", "Sad", "Surprise"][predicted_label]}')
         plt.axis('off')
     
     plt.tight_layout()
     plt.show()
 
 # Example usage
-validation_folder = r"C:\Users\Victor Cardenas\Documents\msc\semestre-4\idi-4\fer-2025\data\processed\validation"
+validation_folder = r"C:\Users\Victor Cardenas\Documents\msc\semestre-4\idi-4\fer-2025\data\training_2025\validation"
 evaluate_model(validation_folder)

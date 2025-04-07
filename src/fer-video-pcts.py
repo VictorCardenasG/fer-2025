@@ -12,16 +12,16 @@ import pandas as pd  # To save logs
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Load the emotion detection model
-model_path = r'C:\Users\Victor Cardenas\Documents\msc\semestre-4\idi-4\fer-2025\models\model_vicfiltered_notransforms_lr5e4_1000_6_emotions_res18_ai.pth'
+model_path = r'C:\Users\Victor Cardenas\Documents\msc\semestre-4\idi-4\fer-2025\models\model_7emotions_2000imgs_res18_ai.pth'
 
 # Define model architecture (MUST match training)
-model = timm.create_model('resnet18', pretrained=False, num_classes=6)
+model = timm.create_model('resnet18', pretrained=False, num_classes=7)
 model.load_state_dict(torch.load(model_path, map_location=device))
 model.to(device)
 model.eval()
 
 # Define emotion labels
-EMOTIONS = ["Angry", "Disgust", "Fear", "Happy", "Sad", "Surprise"]
+EMOTIONS = ["Angry", "Disgust", "Fear", "Happy", "Neutral", "Sad", "Surprise"]
 
 # Load OpenCV face detector
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
@@ -87,7 +87,7 @@ cv2.destroyAllWindows()
 
 # Save the emotion log to a CSV file
 log_df = pd.DataFrame(emotion_log)
-log_file = r"C:\Users\Victor Cardenas\Documents\msc\semestre-4\idi-4\fer-2025\results\logs\emotion_log.csv"
+log_file = r"C:\Users\Victor Cardenas\Documents\msc\semestre-4\idi-4\fer-2025\results\logs\emotion_log_victor_march.csv"
 log_df.to_csv(log_file, index=False)
 
 print(f"Emotion log saved to {log_file}")

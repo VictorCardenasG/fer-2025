@@ -19,9 +19,9 @@ from tqdm import tqdm
 import os
 import pandas as pd 
 
-root_dir = r"C:\Users\Victor Cardenas\Documents\msc\semestre-4\idi-4\fer-2025\data\processed\train"
-sub_folders = ["Anger", "Disgust", "Fear", "Happy", "Sad", "Surprise"]
-labels = [0, 1, 2, 3, 4, 5]
+root_dir = r"C:\Users\Victor Cardenas\Documents\msc\semestre-4\idi-4\fer-2025\data\training_2025\train"
+sub_folders = ["Anger", "Disgust", "Fear", "Happy", "Neutral", "Sad", "Surprise"]
+labels = [0, 1, 2, 3, 4, 5, 6]
 
 data = []
 
@@ -44,11 +44,11 @@ cfg = {
     "root_dir": root_dir,
     "image_size": 256,
     "batch_size": 32,
-    "n_classes": 6,
+    "n_classes": 7,
     "backbone": 'resnet18',  
     "learning_rate": 5e-4,
     "lr_min": 1e-6,
-    "epochs": 2,
+    "epochs": 10,
     "device": torch.device("cuda:0" if torch.cuda.is_available() else "cpu"),
     "seed": 42
 }
@@ -277,7 +277,7 @@ acc, loss, val_acc, val_loss, model = fit(model, optimizer, scheduler, cfg, trai
 
 visualize_history(acc, loss, val_acc, val_loss)
 
-torch.save(model.state_dict(), r'C:\Users\Victor Cardenas\Documents\msc\semestre-4\idi-4\fer-2025\models\model_vicfiltered_notransforms_lr5e4_1000_6_emotions_res18_ai.pth')
+torch.save(model.state_dict(), r'C:\Users\Victor Cardenas\Documents\msc\semestre-4\idi-4\fer-2025\models\model_7emotions_2000imgs_res18_ai.pth')
 
 model.eval()
 
