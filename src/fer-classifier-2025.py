@@ -39,7 +39,6 @@ from sklearn.model_selection import train_test_split
 
 import timm
 
-# Cambia la configuración para utilizar ResNet-18
 cfg = {
     "root_dir": root_dir,
     "image_size": 256,
