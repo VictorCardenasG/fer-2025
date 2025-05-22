@@ -54,7 +54,8 @@ class CustomDataset(Dataset):
 
 # Load the saved model
 model = timm.create_model(cfg["backbone"], pretrained=False, num_classes=cfg["n_classes"]).to(cfg["device"])
-model_path = r"C:\Users\Victor Cardenas\Documents\msc\semestre-4\idi-4\fer-2025\models\model_7emotions_2000imgs_res18_ai.pth"
+model_path = r"C:\Users\Victor Cardenas\Documents\msc\semestre-4\idi-4\fer-2025\models\model_7emotions_april_2000imgs_res18_ai.pth"
+# model_path = r"C:\Users\Victor Cardenas\Documents\msc\semestre-4\idi-4\fer-2025\models\model_7emotions_2000imgs_res18_ai.pth"
 
 
 # Load the model state
@@ -64,6 +65,42 @@ model.eval()  # Set the model to evaluation mode
 # Create directory for incorrect predictions if it doesn't exist
 incorrect_preds_dir = "incorrect_predictions_2"
 os.makedirs(incorrect_preds_dir, exist_ok=True)
+
+def plot_confusion_matrix_dark(conf_matrix, emotions):
+    fig, ax = plt.subplots(figsize=(8, 6), facecolor='black')  # full figure background
+    ax.set_facecolor('black')  # plot area background
+
+    sns.heatmap(
+        conf_matrix,
+        annot=True,
+        fmt='d',
+        cmap='Blues',
+        cbar=False,
+        xticklabels=emotions,
+        yticklabels=emotions,
+        annot_kws={"color": "white"},
+        linewidths=0.5,
+        linecolor='black'
+    )
+
+    # Axis styling
+    ax.set_xlabel('Predicted Emotion', color='white')
+    ax.set_ylabel('True Emotion', color='white')
+    ax.set_title('Confusion Matrix', color='white')
+
+    # Tick styling
+    ax.tick_params(colors='white')  # Make ticks white
+    ax.xaxis.label.set_color('white')
+    ax.yaxis.label.set_color('white')
+    ax.title.set_color('white')
+
+    plt.xticks(rotation=45, ha='right', color='white')
+    plt.yticks(color='white')
+
+    plt.tight_layout()
+    plt.show()
+
+
 
 # Function to evaluate the model on a validation set and save misclassified images
 def evaluate_model(validation_folder):
@@ -131,14 +168,7 @@ def evaluate_model(validation_folder):
     print("\nClassification Report:")
     print(class_report)
 
-    # Plot the confusion matrix
-    plt.figure(figsize=(8, 6))
-    sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues',
-                xticklabels=emotions, yticklabels=emotions)
-    plt.xlabel('Predicted Emotion')
-    plt.ylabel('True Emotion')
-    plt.title('Confusion Matrix')
-    plt.show()
+    plot_confusion_matrix_dark(conf_matrix, emotions=["Anger", "Disgust", "Fear", "Happy", "Neutral", "Sad", "Surprise"])
 
     # Display random samples with true and predicted labels
     display_random_samples(dataset, y_pred, y_true)
@@ -169,5 +199,5 @@ def display_random_samples(dataset, y_pred, y_true, n_samples=20):
     plt.show()
 
 # Example usage
-validation_folder = r"C:\Users\Victor Cardenas\Documents\msc\semestre-4\idi-4\fer-2025\data\training_2025\validation"
+validation_folder = r"C:\Users\Victor Cardenas\Documents\msc\semestre-4\idi-4\fer-2025\data\processed\training_2025\validation"
 evaluate_model(validation_folder)

@@ -42,4 +42,7 @@ def split_faces_in_folder(folder_path):
             print(f"{filename}: saved {face_count} face images in '{folder_path}'")
 
 # Example usage:
-split_faces_in_folder(r"C:\Users\Victor Cardenas\Documents\msc\semestre-4\idi-4\fer-2025\data\raw\march_gemini\angry_grid")
+split_faces_in_folder(r"C:\Users\Victor Cardenas\Documents\msc\semestre-4\idi-4\fer-2025\data\raw\april_stable_diff\sad_grid")
+
+
+

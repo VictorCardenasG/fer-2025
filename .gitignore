@@ -1,4 +1,13 @@
+# Ignore main folders
 data/
 models/
 results/
 environment/
+
+# Ignore folders within src/
+src/models/
+src/mlruns/
+src/incorrect_predictions_2/
+
+# Do not ignore content inside main src/
+!src/
